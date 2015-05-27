@@ -9,23 +9,36 @@
 <body>
 
 <nav>
-  <ul>
-    <li class="active">
+    <%= link_to dashboard_path, { :class => params[:controller].eql?('dashboard') ? 'active' : '' } do %>
       <div class="valign-middle">
         <i class="fa fa-dashboard"></i> Dashboard
       </div>
-    </li>
-    <li>
-      <div class="valign-middle">
-        <i class="fa fa-key"></i> Public keys
-      </div>
-    </li>
-    <li>
+    <% end %>
+    <%= link_to users_path, { :class => params[:controller].eql?('users') ? 'active' : '' } do %>
       <div class="valign-middle">
         <i class="fa fa-users"></i> Users
       </div>
-    </li>
-  </ul>
+    <% end %>
+    <%= link_to users_path do %>
+      <div class="valign-middle">
+        <i class="fa fa-key"></i> Public keys
+      </div>
+    <% end %>
+    <%= link_to shares_path, { :class => params[:controller].eql?('shares') ? 'active' : '' } do %>
+      <div class="valign-middle">
+        <i class="fa fa-archive"></i> Shares
+      </div>
+    <% end %>
+    <%= link_to users_path do %>
+      <div class="valign-middle">
+        <i class="fa fa-database"></i> Quota
+      </div>
+    <% end %>
+    <%= link_to preferences_path, { :class => params[:controller].eql?('preferences') ? 'active': ''} do %>
+      <div class="valign-middle">
+        <i class="fa fa-gears"></i> Preferences
+      </div>
+    <% end %>
 </nav>
 
 <div class="container">

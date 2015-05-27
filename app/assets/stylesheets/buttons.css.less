@@ -1,0 +1,32 @@
+@color-primary: #6F6F6F;
+@color-danger: #DE0000;
+
+.button {
+  &.button-small {
+    height: 2.5rem;
+    line-height: 2.5rem;
+
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  &.button-primary {
+    background-color: @color-primary;
+    border: 1px solid @color-primary;
+
+    &:hover {
+      background-color: darken(@color-primary, 10%);
+      border: 1px solid darken(@color-primary, 10%);
+    }
+  }
+
+  &.button-danger {
+    background-color: @color-danger;
+    border: 1px solid @color-danger;
+
+    &:hover {
+      background-color: darken(@color-danger, 10%);
+      border: 1px solid darken(@color-danger, 10%);
+    }
+  }
+}

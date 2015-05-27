@@ -1,18 +1,29 @@
+<span class="pull-right">
+  <%= link_to "Create user", new_user_path, { :class => "button button-primary" } %>
+</span>
 <h4>Users</h4>
 
 <hr>
 
-<ol>
-  <% @users.each do |user| %>
-  <li>
-    <strong><%= user.name %></strong> (<%= user.email %>)
-    <% if user.pub_keys %>
-    <ul>
-      <% user.pub_keys.each do |key| %>
-      <li>key</li>
+<% if @users.length > 0 %>
+  <table class="u-full-width">
+    <thead>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <td><%= link_to user.name.capitalize, user_path(user) %></td>
+        <td><%= user.email %></td>
+        <td>
+          <%= link_to "Delete", user_path(user),
+                          :method => :delete,
+                          data: { confirm: 'Are you sure?' }, :class => "button button-danger button-small" %>
+        </td>
       <% end %>
-    </ul>
-    <% end %>
-  </li>
-  <% end %>
-</ol>
+    </tbody>
+  </table>
+<% else %>
+<em>No users were found in the database.</em>
+<% end %>
