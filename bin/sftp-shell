@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+unless ENV['SSH_CONNECTION']
+  puts "Only SSH connections are allowed."
+  exit
+end
+
+user_id = ARGV.join
+original_cmd = ENV['SSH_ORIGINAL_COMMAND']
+
+require_relative File.join('..', 'lib', 'sftp-shell', 'sftp_shell')
+
+puts "This is sftp-shell 0.1.0."
+
+if SFTPShell.new(user_id, original_cmd).exec
+  exit 0
+else
+  exit 1
+end

@@ -1,0 +1,2 @@
+class PubKeysController < ApplicationController
+end

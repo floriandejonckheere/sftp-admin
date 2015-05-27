@@ -8,7 +8,31 @@
 </head>
 <body>
 
-<%= yield %>
+<nav>
+  <ul>
+    <li class="active">
+      <div class="valign-middle">
+        <i class="fa fa-dashboard"></i> Dashboard
+      </div>
+    </li>
+    <li>
+      <div class="valign-middle">
+        <i class="fa fa-key"></i> Public keys
+      </div>
+    </li>
+    <li>
+      <div class="valign-middle">
+        <i class="fa fa-users"></i> Users
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div class="panel panel-main">
+    <%= yield %>
+  </div>
+</div>
 
 </body>
 </html>

@@ -1,0 +1,18 @@
+<h4>Users</h4>
+
+<hr>
+
+<ol>
+  <% @users.each do |user| %>
+  <li>
+    <strong><%= user.name %></strong> (<%= user.email %>)
+    <% if user.pub_keys %>
+    <ul>
+      <% user.pub_keys.each do |key| %>
+      <li>key</li>
+      <% end %>
+    </ul>
+    <% end %>
+  </li>
+  <% end %>
+</ol>

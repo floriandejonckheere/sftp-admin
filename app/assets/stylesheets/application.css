@@ -10,6 +10,20 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require font-awesome
+ *= require skeleton-ui
  *= require_tree .
  *= require_self
  */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.valign-middle {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}

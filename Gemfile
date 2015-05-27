@@ -1,5 +1,12 @@
 source 'https://rubygems.org'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-font-awesome'
+  gem 'rails-assets-skeleton-ui'
+end
+
+gem 'less-rails'
+gem 'therubyracer'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
