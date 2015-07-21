@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :shares
   resources :users do
-    resources :pub_keys
+    resources :pub_keys, :except => [:index, :show]
   end
 
   get '/dashboard' => 'dashboard#index'

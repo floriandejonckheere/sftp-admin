@@ -17,6 +17,7 @@ nav {
     width: 10rem;
     height: 10rem;
 
+    outline: none;
     border-radius: @border-radius;
 
     color: white;
@@ -28,6 +29,25 @@ nav {
     &.active {
       color: white;
       background-color: rgba(255, 255, 255, 0.1);
+
+      &:after {
+        visibility: visible;
+      }
+    }
+
+    &:after {
+      position: relative;
+      display: inline-block;
+      margin-bottom: -5.25rem;
+      content: "";
+      background: white;
+      border-left: 1px solid #DCE1CF;
+      border-top: 1px solid #DCE1CF;
+      height: 1.5rem;
+      width: 1.5rem;
+      transform: rotate(45deg);
+      z-index: 999;
+      visibility: hidden;
     }
 
     &:not(:last-child) {

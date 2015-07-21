@@ -1,0 +1,24 @@
+<%= form_for @pubkey, url: user_pub_keys_path do |p| %>
+  <% if @pubkey.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <strong><%= pluralize(@pubkey.errors.count, "error") %> prohibited this key from being saved:</strong>
+    <ul>
+    <% @pubkey.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= p.text_area :key,
+            :class => "form-control key-input",
+            :placeholder => :key,
+            :required => "true" %>
+  </div>
+
+  <div class="form-group">
+    <%= p.submit 'Save',
+            :class => "btn btn-success" %>
+  </div>
+<% end %>

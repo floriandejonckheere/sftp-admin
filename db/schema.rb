@@ -14,10 +14,12 @@
 ActiveRecord::Schema.define(version: 20150527095945) do
 
   create_table "pub_keys", force: :cascade do |t|
+    t.text     "title"
     t.text     "key"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "fingerprint"
     t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "shares", force: :cascade do |t|
@@ -33,8 +35,8 @@ ActiveRecord::Schema.define(version: 20150527095945) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.text     "name"
-    t.text     "email"
+    t.text     "name",       null: false
+    t.text     "email",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
