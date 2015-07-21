@@ -11,7 +11,7 @@
   <% end %>
 
   <div class="row">
-    <div class="one column">
+    <div class="two columns">
       <strong>Name</strong>
     </div>
     <div class="four columns">
@@ -23,19 +23,28 @@
   </div>
 
   <div class="row">
-    <div class="one column">
+    <div class="two columns">
+      <strong>Storage path</strong>
+    </div>
+    <div class="four columns">
+      <p><%= Rails.application.config.sftp_config['storage_path'] %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="two columns">
       <strong>Path</strong>
     </div>
     <div class="four columns">
       <%= s.text_field :path,
-        :placeholder => :path,
+        :placeholder => 'Path (starts with leading slash)',
         :required => 'true',
         :class => 'u-full-width' %>
     </div>
   </div>
 
   <div class="row">
-    <div class="one column">
+    <div class="two columns">
       <strong>Quotum (bytes)</strong>
     </div>
     <div class="four columns">

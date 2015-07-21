@@ -11,6 +11,7 @@ sftp-admin requires the following components:
 - `fusequota` if you wish to use the quota feature
 - ~~`encFS` if you wish to use the encryption feature~~ rsyncrypto should be used for now
 - A properly configured SSH server that uses the `~/.ssh/authorized_keys` mechanism (OpenSSH)
+- The `du` utility for calculating disk usage
 
 ## Setup
 

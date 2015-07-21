@@ -28,10 +28,10 @@
   <div class="four columns">
     <div class="info-panel info-panel-color-3">
       <div class="info-panel-body">
-        <h2>3.59</h2> <h5>GB total</h5>
+        <h2><%= number_to_human_size(Share.sum(:size)).split(' ')[0] %></h2> <h5><%= number_to_human_size(Share.sum(:size)).split(' ')[1] %> total</h5>
       </div>
       <div class="info-panel-actions">
-        <%= link_to "Details &raquo;".html_safe, users_path, :class => "white-text" %>
+        <%= link_to "Recalculate &raquo;".html_safe, usage_path, :method => :post, :class => "white-text" %>
       </div>
     </div>
   </div>

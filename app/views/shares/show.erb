@@ -8,6 +8,7 @@
     <h5>Details</h5>
     <strong>Name:</strong> <%= @share.name %><br>
     <strong>Path: </strong> <%= @share.path %><br>
-    <strong>Quotum: </strong> <%= @share.quotum %> B
+    <strong>Size: </strong> <%= number_to_human_size(@share.size) %> <small>(<%= link_to 'Recalculate &raquo;'.html_safe, share_usage_path(@share), :method => :post %>)</small><br>
+    <strong>Quotum: </strong> <%= @share.quotum == 0 ? 'disabled' : number_to_human_size(@share.quotum) %>
   </div>
 </div>

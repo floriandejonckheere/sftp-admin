@@ -1,11 +1,8 @@
 # User account
 user: sftp
-
-# Welcome message
 welcome_msg: "Welcome, #{user_name}!"
 
 # URL to API endpoint. Used for api calls. Should end with a slash.
-# Default: http://localhost:3000/
 api_url: "http://localhost:3000/"
 
 # Storage path. Should end with a slash.

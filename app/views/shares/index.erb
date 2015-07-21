@@ -8,6 +8,7 @@
     <thead>
       <th>Name</th>
       <th>Path</th>
+      <th>Usage</th>
       <th class="u-align-right">Actions</th>
     </thead>
     <tbody>
@@ -15,6 +16,10 @@
       <tr>
         <td><%= link_to share.name.capitalize, share_path(share) %></td>
         <td><%= share.path %></td>
+        <td><%= number_to_human_size(share.size) %>
+          <% if share.quotum != 0 %>
+            /<%= number_to_human_size(share.quotum) %></td>
+          <% end %>
         <td class="u-align-right">
           <%= link_to 'Delete', share_path(share),
                           :method => :delete,

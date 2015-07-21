@@ -5,6 +5,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-skeleton-ui'
 end
 
+# Schedule tasks
+gem 'whenever'
 # SSH utils
 gem 'ssh-fingerprint'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

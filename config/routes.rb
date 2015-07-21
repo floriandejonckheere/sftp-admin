@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
 
-  resources :shares
+  resources :shares do
+    post 'usage'
+  end
   resources :users do
     resources :pub_keys, :except => [:index, :show]
   end
 
   get '/dashboard' => 'dashboard#index'
+  post '/usage' => 'shares#usage_all'
   get '/preferences' => 'preferences#index'
 
   root 'dashboard#index'

@@ -42,6 +42,21 @@ class SharesController < ApplicationController
     redirect_to shares_path
   end
 
+  # TODO: async these methods
+  def usage
+    @share = Share.find(params[:share_id])
+    @share.usage
+
+    redirect_to share_path(@share)
+  end
+
+  def usage_all
+    Share.all.each do |share|
+      share.usage
+    end
+
+    redirect_to shares_path
+  end
 
   private
   def share_params

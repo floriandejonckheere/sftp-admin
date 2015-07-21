@@ -7,4 +7,26 @@ class Share < ActiveRecord::Base
   validates_format_of :path, :with => /\A\/[^\0]*/
   validates :quotum, presence: true
 
+  before_save :create_storage_directory
+
+  #
+  # Methods
+  #
+
+  # Returns full directory path
+  def full_path
+    return File.join(Rails.application.config.sftp_config['storage_path'], path)
+  end
+
+  # Recalculate disk usage
+  def usage
+    # TODO: cross-reference du params with fusequota for correct measuring
+    usage = `du -bs "#{self.full_path}"`.split("\t").first.to_i
+    update(:size => usage)
+    return usage
+  end
+
+  def create_storage_directory
+    FileUtils.mkdir_p full_path unless File.exists?(full_path)
+  end
 end
