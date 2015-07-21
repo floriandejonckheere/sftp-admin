@@ -1,7 +1,7 @@
 <%= form_for @share do |s| %>
   <% if @share.errors.any? %>
   <div id="error_explanation" class="alert alert-danger">
-    <strong><%= pluralize(@share.errors.count, "error") %> prohibited this share from being saved:</strong>
+    <strong><%= pluralize(@share.errors.count, 'error') %> prohibited this share from being saved:</strong>
     <ul>
     <% @share.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -48,6 +48,6 @@
 
   <div class="row">
     <%= s.submit 'Save',
-            :class => "btn btn-success" %>
+            :class => 'btn btn-success' %>
   </div>
 <% end %>

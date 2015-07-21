@@ -1,6 +1,4 @@
-<span class="pull-right">
-  <%= link_to "Create", new_user_path, { :class => "button button-primary" } %>
-</span>
+<%= link_to 'Add', new_user_path, :class => 'u-pull-right button button-primary' %>
 <h4>Users</h4>
 
 <hr>
@@ -18,9 +16,9 @@
         <td><%= link_to user.name.capitalize, user_path(user) %></td>
         <td><%= user.email %></td>
         <td class="u-align-right">
-          <%= link_to "Delete", user_path(user),
+          <%= link_to 'Delete', user_path(user),
                           :method => :delete,
-                          data: { confirm: 'Are you sure?' }, :class => "button button-danger button-small" %>
+                          data: { confirm: 'Are you sure?' }, :class => 'button button-danger button-small' %>
         </td>
       </tr>
       <% end %>
