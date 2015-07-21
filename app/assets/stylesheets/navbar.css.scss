@@ -1,4 +1,4 @@
-@border-radius: 5px;
+$border-radius: 5px;
 
 nav {
   width: 100%;
@@ -18,7 +18,7 @@ nav {
     height: 10rem;
 
     outline: none;
-    border-radius: @border-radius;
+    border-radius: $border-radius;
 
     color: white;
     text-decoration: none;
@@ -41,8 +41,8 @@ nav {
       margin-bottom: -5.25rem;
       content: "";
       background: white;
-      border-left: 1px solid #DCE1CF;
-      border-top: 1px solid #DCE1CF;
+      border-left: 1px solid $color-secondary;
+      border-top: 1px solid $color-secondary;
       height: 1.5rem;
       width: 1.5rem;
       transform: rotate(45deg);

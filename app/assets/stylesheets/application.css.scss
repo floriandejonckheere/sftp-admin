@@ -12,15 +12,24 @@
  *
  *= require font-awesome
  *= require skeleton-ui
- *= require_tree .
  *= require_self
  */
+
+@import "variables";
+@import "buttons";
+@import "navbar";
+@import "panel";
 
 html,
 body {
   margin: 0;
   padding: 0;
 }
+
+/**
+ * TODO: implement these in Skeleton UI
+ *
+ * */
 
 .valign-middle {
   position: relative;
@@ -30,4 +39,13 @@ body {
 
 .u-align-right {
   text-align: right;
+}
+
+.white-text,
+.white-text:hover,
+.white-text:active,
+.white-text:link,
+.white-text:visited {
+  color: white;
+  text-decoration: none;
 }
