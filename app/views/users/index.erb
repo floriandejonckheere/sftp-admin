@@ -5,19 +5,19 @@
 
 <hr>
 
-<% if @users.length > 0 %>
+<% if @users.any? %>
   <table class="u-full-width">
     <thead>
       <th>Username</th>
       <th>Email</th>
-      <th>Actions</th>
+      <th class="u-align-right">Actions</th>
     </thead>
     <tbody>
       <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.name.capitalize, user_path(user) %></td>
         <td><%= user.email %></td>
-        <td>
+        <td class="u-align-right">
           <%= link_to "Delete", user_path(user),
                           :method => :delete,
                           data: { confirm: 'Are you sure?' }, :class => "button button-danger button-small" %>
@@ -27,5 +27,5 @@
     </tbody>
   </table>
 <% else %>
-<em>No users were found in the database.</em>
+<em>No users were found</em>
 <% end %>

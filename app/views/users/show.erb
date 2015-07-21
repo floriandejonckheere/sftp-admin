@@ -12,10 +12,14 @@
   <div class="six columns">
     <%= link_to "Add", new_user_pub_key_path(:user_id => @user), :class => "pull-right button button-primary" %>
     <h5>Public keys</h5>
-    <% @user.pub_keys.each do |pubkey| %>
-    <div class="row">
-      <strong><%= link_to pubkey.fingerprint, edit_pub_key_path(pubkey) %></strong>
-    </div>
+    <% if @user.pub_keys.any? %>
+      <% @user.pub_keys.each do |pubkey| %>
+      <ul>
+        <li><%= link_to pubkey.title, edit_user_pub_key_path(@user, pubkey) %></li>
+      </ul>
+      <% end %>
+    <% else %>
+      <em>No public keys defined</em>
     <% end %>
   </div>
 </div>

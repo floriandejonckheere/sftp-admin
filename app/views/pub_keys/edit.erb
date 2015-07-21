@@ -1,4 +1,9 @@
-<h4>SSH key <%= @pubkey.fingerprint.lowercase %></h4>
+<span class="u-pull-right">
+  <%= link_to "Delete", user_pub_key_path(@pub_key.user, @pub_key),
+                :method => :delete,
+                data: { confirm: 'Are you sure?' }, :class => "button button-danger" %>
+</span>
+<h4>Edit public key <%= @pub_key.title %></h4>
 
 <hr>
 

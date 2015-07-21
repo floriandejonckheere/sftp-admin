@@ -9,22 +9,22 @@
 <body>
 
 <nav>
-    <%= link_to dashboard_path, { :class => params[:controller].eql?('dashboard') ? 'active' : '' } do %>
+    <%= link_to dashboard_path, { :class => controller?('dashboard') ? 'active' : '' } do %>
       <div class="valign-middle">
         <i class="fa fa-dashboard"></i> Dashboard
       </div>
     <% end %>
-    <%= link_to users_path, { :class => params[:controller].eql?('users') ? 'active' : '' } do %>
+    <%= link_to users_path, { :class => controller?('users', 'pub_keys') ? 'active' : '' } do %>
       <div class="valign-middle">
         <i class="fa fa-users"></i> Users
       </div>
     <% end %>
-    <%= link_to shares_path, { :class => params[:controller].eql?('shares') ? 'active' : '' } do %>
+    <%= link_to shares_path, { :class => controller?('shares') ? 'active' : '' } do %>
       <div class="valign-middle">
         <i class="fa fa-archive"></i> Shares
       </div>
     <% end %>
-    <%= link_to preferences_path, { :class => params[:controller].eql?('preferences') ? 'active': ''} do %>
+    <%= link_to preferences_path, { :class => controller?('preferences') ? 'active': ''} do %>
       <div class="valign-middle">
         <i class="fa fa-gears"></i> Preferences
       </div>

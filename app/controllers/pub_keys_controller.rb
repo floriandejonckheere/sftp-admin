@@ -4,7 +4,13 @@ class PubKeysController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
-    if @user.pub_keys.create(pubkey_params, :fingerprint => SSHFingerprint.compute(params[:key]))
+
+    parameters = pubkey_params
+    parameters[:fingerprint] = SSHFingerprint.compute(params[:pub_key][:key])
+
+    @pub_key = @user.pub_keys.new(parameters)
+
+    if @pub_key.save
       redirect_to @user
     else
       render 'new'
@@ -13,18 +19,18 @@ class PubKeysController < ApplicationController
 
   def new
     @user = User.find(params[:user_id])
-    @pubkey = PubKey.new
+    @pub_key = PubKey.new
   end
 
   def edit
-    @pubkey = PubKey.find(params[:pubkey_id])
+    @pub_key = PubKey.find(params[:id])
   end
 
   def update
     @user = User.find(params[:user_id])
-    @pubkey = PubKey.find(params[:pubkey_id])
+    @pub_key = PubKey.find(params[:id])
 
-    if @pubkey.update(pubkey_params, :fingerprint => SSHFingerprint.compute(params[:key]))
+    if @pub_key.update(pubkey_params, :fingerprint => SSHFingerprint.compute(params[:key]))
       redirect_to @user
     else
       render 'edit'
@@ -33,8 +39,8 @@ class PubKeysController < ApplicationController
 
   def destroy
     @user = User.find(params[:user_id])
-    @pubkey = PubKey.find(params[:pubkey_id])
-    @pubkey.destroy
+    @pub_key = PubKey.find(params[:id])
+    @pub_key.destroy
 
     redirect_to @user
   end
@@ -42,7 +48,7 @@ class PubKeysController < ApplicationController
 
   private
   def pubkey_params
-    params.require(:pubkey).permit(:key)
+    params.require(:pub_key).permit(:title, :key)
   end
 
 end
