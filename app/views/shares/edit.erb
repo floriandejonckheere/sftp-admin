@@ -1,0 +1,10 @@
+<span class="u-pull-right">
+  <%= link_to "Delete", share_path(@share),
+                  :method => :delete,
+                  data: { confirm: 'Are you sure?' }, :class => "button button-danger" %>
+</span>
+<h4>Edit <%= @share.name.capitalize %></h4>
+
+<hr>
+
+<%= render 'form' %>

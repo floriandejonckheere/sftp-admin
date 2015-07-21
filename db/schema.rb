@@ -14,31 +14,36 @@
 ActiveRecord::Schema.define(version: 20150527095945) do
 
   create_table "pub_keys", force: :cascade do |t|
-    t.text     "title"
-    t.text     "key"
-    t.text     "fingerprint"
+    t.string   "title",       null: false
+    t.string   "key",         null: false
+    t.string   "fingerprint", null: false
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "shares", force: :cascade do |t|
-    t.text     "name"
-    t.text     "path"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",                   null: false
+    t.string   "path",                   null: false
+    t.integer  "quotum",     default: 0, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
+  add_index "shares", ["path"], name: "index_shares_on_path", unique: true
+
   create_table "shares_users", id: false, force: :cascade do |t|
-    t.integer "share_id"
-    t.integer "user_id"
+    t.integer "share_id", null: false
+    t.integer "user_id",  null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.text     "name",       null: false
-    t.text     "email",      null: false
+    t.string   "name",       null: false
+    t.string   "email",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

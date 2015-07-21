@@ -14,7 +14,9 @@
     background-color: @color-primary;
     border: 1px solid @color-primary;
 
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
       background-color: darken(@color-primary, 10%);
       border: 1px solid darken(@color-primary, 10%);
     }

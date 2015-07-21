@@ -1,3 +1,31 @@
+<span class="pull-right">
+  <%= link_to "Create", new_share_path, { :class => "button button-primary" } %>
+</span>
 <h4>Shares</h4>
 
 <hr>
+
+<% if @shares.any? %>
+  <table class="u-full-width">
+    <thead>
+      <th>Name</th>
+      <th>Path</th>
+      <th class="u-align-right">Actions</th>
+    </thead>
+    <tbody>
+      <% @shares.each do |share| %>
+      <tr>
+        <td><%= link_to share.name.capitalize, share_path(share) %></td>
+        <td><%= share.path %></td>
+        <td class="u-align-right">
+          <%= link_to "Delete", share_path(share),
+                          :method => :delete,
+                          data: { confirm: 'Are you sure?' }, :class => "button button-danger button-small" %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <em>No shares were found</em>
+<% end %>

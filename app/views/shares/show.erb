@@ -1,0 +1,13 @@
+<%= link_to "Edit", edit_share_path(@share), :class => "pull-right button button-primary" %>
+<h4><%= @share.name %></h4>
+
+<hr>
+
+<div class="row">
+  <div class="six columns">
+    <h5>Details</h5>
+    <strong>Name:</strong> <%= @share.name %><br>
+    <strong>Path: </strong> <%= @share.path %><br>
+    <strong>Quotum: </strong> <%= @share.quotum %> B
+  </div>
+</div>
