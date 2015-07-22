@@ -26,17 +26,13 @@ module SftpAdmin
     config.generators.stylesheets = false
     config.generators.javascripts = false
 
-    # Logging
-    log_level = String(ENV['LOG_LEVEL'] || "info").upcase
-    config.logger = Logger.new(STDOUT)
-    config.logger.level = Logger.const_get(log_level)
-    config.log_level = log_level
+    config.autoload_paths += %W(#{config.root}/lib)
 
     config.after_initialize do
       # Check fusequota
       if `fusequota`.nil?
         config.sftp['quota_enabled'] = false
-        config.logger.warn "The 'fusequota' command was not found, quotas are disabled"
+        Rails.logger.warn "The 'fusequota' command was not found, quotas are disabled"
       end
     end
   end

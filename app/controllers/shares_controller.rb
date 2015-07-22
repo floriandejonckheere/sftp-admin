@@ -57,7 +57,7 @@ class SharesController < ApplicationController
   end
 
   def self.usage_all
-    Rails.application.config.logger.info "Recalculating disk usage for #{Share.count} shares"
+    Rails.logger.info "Recalculating disk usage for #{Share.count} shares"
     Share.all.each do |share|
       share.usage
     end

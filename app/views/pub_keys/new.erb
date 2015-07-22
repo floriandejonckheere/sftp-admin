@@ -2,4 +2,6 @@
 
 <hr>
 
-<%= render 'form' %>
+<%= form_for @pub_key, url: user_pub_keys_path(@user) do |p| %>
+  <%= render :partial => 'form', :locals => {:p => p} %>
+<% end %>
