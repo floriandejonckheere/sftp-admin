@@ -4,7 +4,7 @@ class Share < ActiveRecord::Base
 
   validates :name, presence: true
   validates :path, presence: true, uniqueness: true
-  validates_format_of :path, :with => /\A\/[^\0]*/
+  validates_format_of :path, :with => /[^\0]*/
   validates :quota, presence: true
 
   before_create :create_storage_directory

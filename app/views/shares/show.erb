@@ -7,7 +7,7 @@
   <div class="six columns">
     <h5>Details</h5>
     <strong>Name:</strong> <%= @share.name %><br>
-    <strong>Path: </strong> <%= @share.path %><br>
+    <strong>Path: </strong> <%= File.join('/', @share.path) %><br>
     <strong>Size: </strong> <%= number_to_human_size(@share.size) %> <small>(<%= link_to 'Recalculate &raquo;'.html_safe, share_usage_path(@share), :method => :post %>)</small><br>
     <strong>Quota: </strong> <%= @share.quota? ? number_to_human_size(@share.quota) : 'disabled' %>
   </div>

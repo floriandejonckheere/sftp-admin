@@ -23,7 +23,7 @@
         <td class="u-align-right">
           <%= link_to 'Delete', share_path(share),
                           :method => :delete,
-                          data: { confirm: 'Are you sure?' }, :class => 'button button-danger button-small' %>
+                          data: { confirm: 'Are you sure? This will irreversibly delete ALL files and folders in this share!' }, :class => 'button button-danger button-small' %>
         </td>
       </tr>
       <% end %>
