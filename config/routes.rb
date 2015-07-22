@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'dashboard#index'
   post '/usage' => 'shares#usage_all'
-  get '/preferences' => 'preferences#index'
+  get '/statistics' => 'statistics#index'
 
   root 'dashboard#index'
 
