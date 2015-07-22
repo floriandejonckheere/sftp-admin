@@ -3,7 +3,10 @@ class PubKeysController < ApplicationController
   def create
     @user = User.find(params[:user_id])
 
-    @pub_key = @user.pub_keys.new(pubkey_params)
+    params = pubkey_params
+    params[:key] = params[:key].chomp
+
+    @pub_key = @user.pub_keys.new(params)
 
     if @pub_key.save
       redirect_to @user

@@ -5,6 +5,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-skeleton-ui'
 end
 
+# REST client
+gem 'rest-client'
 # Schedule tasks
 gem 'whenever'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+#
+# SFTP shell, invoked from ~/.ssh/authorized_keys
+#
+
 unless ENV['SSH_CONNECTION']
   puts "Only SSH connections are allowed."
   exit
@@ -8,9 +12,11 @@ end
 user_id = ARGV.join
 original_cmd = ENV['SSH_ORIGINAL_COMMAND']
 
+ROOT_PATH = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+
 require_relative File.join('..', 'lib', 'sftp-shell', 'sftp_shell')
 
-puts "This is sftp-shell 0.1.0."
+puts "This is sftp-shell #{File.read(File.join(ROOT_PATH, 'VERSION')).chomp}."
 
 if SFTPShell.new(user_id, original_cmd).exec
   exit 0

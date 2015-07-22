@@ -8,6 +8,9 @@ home_directory: "/home/sftp/"
 # Root path of shares
 storage_path: "/home/sftp/storage/"
 
+# API endpoint URL
+api_endpoint: "http://localhost:3000/"
+
 # Allowed commands
 allowed_cmds: [sftp, scp, rsync, rdist, cvs]
 

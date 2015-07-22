@@ -1,13 +1,11 @@
-#!/usr/bin/env ruby
-
-ROOT_PATH = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
-
+require 'rest-client'
 require_relative 'sftp_config'
 
 class SFTPShell
 
   class AccessDeniedError < StandardError; end
   class DisallowedCommandError < StandardError; end
+  class InvalidSharePathError < StandardError; end
 
   attr_accessor :config, :user_id, :original_cmd
 
@@ -18,7 +16,12 @@ class SFTPShell
   end
 
   def exec
-    # Authentication
+    return false unless @original_cmd
+
+    user = JSON.parse!(RestClient.get URI.join(@config['api_endpoint'], '/users/', user_id).to_s, {:accept => :json})
+    p user
+    puts "Welcome, #{user['name']}!"
+    return true
   end
 
   def exec_cmd(*args)

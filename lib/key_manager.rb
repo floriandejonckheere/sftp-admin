@@ -5,15 +5,15 @@ class KeyManager
     @@authorized_keys_path
   end
 
-  def self.key_command(key_id)
-    "#{Rails.root.join('lib', 'sftp-shell', 'sftp_shell.rb')} #{key_id}"
+  def self.key_command(user_id)
+    "#{Rails.root.join('bin', 'sftp-shell')} #{user_id}"
   end
 
   def self.add_key(key_id)
-    Rails.logger.info "Writing key #{key_id} to #{KeyManager.authorized_keys_path}"
     key = PubKey.find(key_id)
     raise "Key #{key_id} not found" if key.nil?
-    key_line = "command=\"#{KeyManager.key_command(key_id)}\" #{key.key}\n"
+    Rails.logger.info "Writing key #{key.user.id} to #{KeyManager.authorized_keys_path}"
+    key_line = "command=\"#{KeyManager.key_command(key.user.id)}\" #{key.key}"
     File.open(KeyManager.authorized_keys_path, 'a') { |file| file.write(key_line) }
   end
 
@@ -25,11 +25,13 @@ class KeyManager
   end
 
   def self.rm_key(key_id)
+    key = PubKey.find(key_id)
+    raise "Key #{key_id} not found" if key.nil?
     Rails.logger.info "Removing key #{key_id} from #{KeyManager.authorized_keys_path}"
       Tempfile.open('authorized_keys') do |temp|
         open(KeyManager.authorized_keys_path, 'r+') do |current|
           current.each do |line|
-            temp.puts(line) unless line.start_with?("command=\"#{KeyManager.key_command(key_id)}\"")
+            temp.puts(line) unless line.start_with?("command=\"#{KeyManager.key_command(key.user.id)}\"")
           end
         end
         temp.close
