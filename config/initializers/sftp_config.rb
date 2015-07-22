@@ -1,1 +1,1 @@
-Rails.configuration.sftp_config = YAML.load_file(Rails.root.join('config', 'sftp-admin.yml'))
+Rails.configuration.sftp = YAML.load_file(Rails.root.join('config.yml'))

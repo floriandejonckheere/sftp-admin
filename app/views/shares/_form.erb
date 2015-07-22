@@ -27,7 +27,7 @@
       <strong>Storage path</strong>
     </div>
     <div class="four columns">
-      <p><%= Rails.application.config.sftp_config['storage_path'] %></p>
+      <p><%= Rails.application.config.sftp['storage_path'] %></p>
     </div>
   </div>
 
@@ -45,13 +45,17 @@
 
   <div class="row">
     <div class="two columns">
-      <strong>Quotum (bytes)</strong>
+      <strong>Quota (bytes)</strong>
     </div>
     <div class="four columns">
-      <%= s.number_field :quotum,
-        :placeholder => :quotum,
-        :required => 'true',
-        :class => 'u-full-width' %>
+      <% if Rails.application.config.sftp['quota_enabled'] %>
+        <%= s.number_field :quota,
+          :placeholder => :quota,
+          :required => 'true',
+          :class => 'u-full-width' %>
+      <% else %>
+        Disabled
+      <% end %>
     </div>
   </div>
 

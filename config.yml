@@ -1,0 +1,15 @@
+# SSH-enabled user
+user: sftp
+welcome_msg: "Welcome, #{user_name}!"
+
+# Home directory of user
+home_directory: "/home/sftp/"
+
+# Root path of shares
+storage_path: "/home/sftp/storage/"
+
+# Allowed commands
+allowed_cmds: [sftp, scp, rsync, rdist, cvs]
+
+# Quotas
+quota_enabled: true

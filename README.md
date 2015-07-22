@@ -21,4 +21,8 @@ First, create a user under which the application should run -- for example `sftp
 # useradd --home-dir /home/sftp sftp
 ```
 
-Make sure this user has SSH permission (commonly achieved by adding it to the `sshusers` group).
+Make sure this user has SSH permission (commonly achieved by adding it to the `sshusers` group). Then create the appropriate files and folders for this user (see `config.yml`).
+
+```
+# sudo -u sftp -H mkdir -p ~/.ssh/ ~/storage/
+```

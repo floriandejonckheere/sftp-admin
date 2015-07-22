@@ -45,6 +45,14 @@ class PubKeysController < ApplicationController
     redirect_to @user
   end
 
+  def self.write_keys
+    Rails.application.config.logger.info "Writing #{PubKey.count} keys to #{PubKey.authorized_keys_path}"
+    File.open(PubKey.authorized_keys_path, 'w') {}
+    PubKey.all.each do |pub_key|
+      pub_key.append_key
+    end
+  end
+
 
   private
   def pubkey_params

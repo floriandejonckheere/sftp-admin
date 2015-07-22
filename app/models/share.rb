@@ -5,17 +5,24 @@ class Share < ActiveRecord::Base
   validates :name, presence: true
   validates :path, presence: true, uniqueness: true
   validates_format_of :path, :with => /\A\/[^\0]*/
-  validates :quotum, presence: true
+  validates :quota, presence: true
 
-  before_save :create_storage_directory
+  before_create :create_storage_directory
+  after_destroy :delete_storage_directory
 
   #
   # Methods
   #
 
+  # Returns quota or false (disabled)
+  def quota?
+    return self.quota if (self.quota != 0 && Rails.application.config.sftp['quota_enabled'])
+    return false
+  end
+
   # Returns full directory path
   def full_path
-    return File.join(Rails.application.config.sftp_config['storage_path'], path)
+    return File.join(Rails.application.config.sftp['storage_path'], path)
   end
 
   # Recalculate disk usage
@@ -27,6 +34,11 @@ class Share < ActiveRecord::Base
   end
 
   def create_storage_directory
-    FileUtils.mkdir_p full_path unless File.exists?(full_path)
+    raise "File or directory #{full_path} already exists" if File.exists?(full_path)
+    FileUtils.mkdir_p full_path
+  end
+
+  def delete_storage_directory
+    FileUtils.rm_rf(full_path)
   end
 end

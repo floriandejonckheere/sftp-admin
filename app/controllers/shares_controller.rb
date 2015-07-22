@@ -51,16 +51,22 @@ class SharesController < ApplicationController
   end
 
   def usage_all
-    Share.all.each do |share|
-      share.usage
-    end
+    SharesController.usage_all
 
     redirect_to shares_path
   end
 
+  def self.usage_all
+    Rails.application.config.logger.info "Recalculating disk usage for #{Share.count} shares"
+    Share.all.each do |share|
+      share.usage
+    end
+  end
+
+
   private
   def share_params
-    params.require(:share).permit(:name, :path, :quotum)
+    params.require(:share).permit(:name, :path, :quota)
   end
 
 end
