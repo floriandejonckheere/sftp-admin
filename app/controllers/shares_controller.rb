@@ -66,7 +66,7 @@ class SharesController < ApplicationController
 
   private
   def share_params
-    params.require(:share).permit(:name, :path, :quota)
+    params.require(:share).permit(:name, :path, :quota, :quota_unit)
   end
 
 end

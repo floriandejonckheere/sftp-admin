@@ -44,4 +44,10 @@ class KeyManager
     File.open(KeyManager.authorized_keys_path, 'w') {}
   end
 
+  def self.regenerate_all
+    Rails.logger.info "Regenerating authorized_keys file for #{PubKey.count} keys"
+    self.clear
+    self.add_all_keys
+  end
+
 end

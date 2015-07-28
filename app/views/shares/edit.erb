@@ -1,6 +1,6 @@
 <%= link_to 'Delete', share_path(@share),
                 :method => :delete,
-                data: { confirm: 'Are you sure?' },
+                data: { confirm: 'Are you sure? This will irreversibly delete ALL files and folders in this share!' },
                 :class => 'u-pull-right button button-danger' %>
 <h4>Edit <%= @share.name.capitalize %></h4>
 

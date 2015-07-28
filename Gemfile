@@ -5,6 +5,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-skeleton-ui'
 end
 
+# Size parsing
+gem 'filesize'
 # REST client
 gem 'rest-client'
 # Schedule tasks
