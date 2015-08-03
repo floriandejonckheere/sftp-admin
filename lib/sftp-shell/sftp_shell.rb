@@ -1,5 +1,8 @@
-require 'rest-client'
+require 'shellwords'
+
 require_relative 'sftp_config'
+require_relative 'sftp_api'
+require_relative 'sftp_logger'
 
 class SFTPShell
 
@@ -7,25 +10,56 @@ class SFTPShell
   class DisallowedCommandError < StandardError; end
   class InvalidSharePathError < StandardError; end
 
-  attr_accessor :config, :user_id, :original_cmd
+  attr_accessor :config, :user, :original_cmd, :cmd
 
   def initialize(user_id, original_cmd)
     @config = SFTPConfig.new.config
-    @user_id = user_id
+    @api = SFTPAPI.new
+    @user = @api.get_user(user_id)
     @original_cmd = original_cmd
   end
 
   def exec
-    return false unless @original_cmd
-
-    user = JSON.parse!(RestClient.get URI.join(@config['api_endpoint'], '/users/', user_id).to_s, {:accept => :json})
-    p user
+    $logger.info "Authenticated user #{user['name']}"
     puts "Welcome, #{user['name']}!"
-    return true
+
+    if @original_cmd.nil?
+      false
+    else
+      parse_cmd
+      verify_access
+      execute_cmd
+      true
+    end
+
+  rescue AccessDeniedError => ex
+    $logger.warn "Access denied for user #{user['name']}: #{@original_cmd}"
+    puts "sftp-shell: #{@original_cmd}: Access denied."
+    false
+  rescue DisallowedCommandError => ex
+  $logger.warn "Command not allowed for user #{user['name']}: #{@original_cmd}"
+    puts "sftp-shell: #{@cmd.first}: Command not allowed."
+    false
+  rescue InvalidSharePathError => ex
+  $logger.warn "Invalid share path for user #{user['name']}: #{@original_cmd}"
+    puts "sftp-shell: #{@original_cmd}: Invalid share path"
+    false
   end
 
-  def exec_cmd(*args)
-    Kernel::exec({ 'PATH' => ENV['PATH'], 'LD_LIBRARY_PATH' => ENV['LD_LIBRARY_PATH'] }, *args, unsetenv_others: true)
+  def parse_cmd
+    @cmd = Shellwords.shellwords(@original_cmd)
+
+    raise DisallowedCommandError unless @config['allowed_cmds'].include?(cmd.first)
+    share = @cmd.last.split('/')[0]
+    raise InvalidSharePathError unless @api.check_share_path(share)
+  end
+
+  def verify_access
+
+  end
+
+  def execute_cmd
+
   end
 
 end

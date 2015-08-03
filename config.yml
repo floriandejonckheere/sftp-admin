@@ -5,6 +5,9 @@ welcome_msg: "Welcome, #{user_name}!"
 # Home directory of user
 home_directory: "/home/sftp/"
 
+# sftp-shell log
+sftp_log: "/home/sftp/sftp-shell.log"
+
 # Root path of shares
 storage_path: "/home/sftp/storage/"
 
