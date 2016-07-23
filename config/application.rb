@@ -30,8 +30,8 @@ module SftpAdmin
 
     config.after_initialize do
       # Check fusequota
-      if `fusequota`.nil?
-        config.sftp['quota_enabled'] = false
+      if config.sftp['enable_quotas'] and `fusequota`.nil?
+        config.sftp['enable_quotas'] = false
         Rails.logger.warn "The 'fusequota' command was not found, quotas are disabled"
       end
     end

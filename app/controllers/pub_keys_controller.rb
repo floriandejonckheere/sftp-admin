@@ -45,9 +45,6 @@ class PubKeysController < ApplicationController
     redirect_to @user
   end
 
-  def self.regenerate_all
-    KeyManager.regenerate_all
-  end
 
   private
   def pubkey_params

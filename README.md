@@ -34,6 +34,7 @@ Make sure this user has SSH permission (commonly achieved by adding it to the `s
 
 - Support for creating users, shares and assigning shares to users (ro or rw).
 - Support for accessing assigned shares
+- Admin authentication
 
 **v2.0**
 

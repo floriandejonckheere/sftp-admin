@@ -16,3 +16,9 @@ api_endpoint: "http://localhost:3000/"
 
 # Allowed commands
 allowed_cmds: [sftp, scp, rsync, rdist, cvs]
+
+# Enable/disable quota functionality
+enable_quotas: true
+
+# Enable/disable encryption functionality
+enable_encryption: false

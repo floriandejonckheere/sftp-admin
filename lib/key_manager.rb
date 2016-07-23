@@ -24,7 +24,7 @@ class KeyManager
     end
   end
 
-  def self.rm_key(key_id)
+  def self.remove_key(key_id)
     key = PubKey.find(key_id)
     raise "Key #{key_id} not found" if key.nil?
     Rails.logger.info "Removing key #{key_id} from #{KeyManager.authorized_keys_path}"

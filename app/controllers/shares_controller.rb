@@ -58,15 +58,17 @@ class SharesController < ApplicationController
 
   def self.usage_all
     Rails.logger.info "Recalculating disk usage for #{Share.count} shares"
-    Share.all.each do |share|
-      share.usage
-    end
+    Share.all.each { |share| share.usage }
   end
 
 
   private
   def share_params
-    params.require(:share).permit(:name, :path, :quota, :quota_unit)
+    if Rails.application.config.sftp['enable_quotas']
+      params.require(:share).permit(:name, :path, :quota, :quota_unit)
+    else
+      params.require(:share).permit(:name, :path)
+    end
   end
 
 end
