@@ -16,6 +16,3 @@ api_endpoint: "http://localhost:3000/"
 
 # Allowed commands
 allowed_cmds: [sftp, scp, rsync, rdist, cvs]
-
-# Quotas
-quota_enabled: true
