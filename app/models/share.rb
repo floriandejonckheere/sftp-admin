@@ -1,7 +1,5 @@
 class Share < ActiveRecord::Base
 
-  SIZES = ['B', 'KB', 'KiB', 'MB', 'MiB', 'GB', 'GiB', 'TB', 'TiB', 'PB', 'PiB']
-
   has_and_belongs_to_many :users,
                             -> { distinct }
 
@@ -31,7 +29,7 @@ class Share < ActiveRecord::Base
   # Methods
   #
 
-  # Returns quota or false (disabled)
+  # Returns quota or false (disabled either globally or per share)
   def quota?
     (self.quota && self.quota != 0 && Rails.application.config.sftp['enable_quotas']) ? self.quota : false
   end
@@ -43,7 +41,7 @@ class Share < ActiveRecord::Base
 
   # Recalculate disk usage
   def recalculate_usage
-    usage = `du -bs "#{self.full_path}"`.split("\t").first.to_i
+    usage = `du -bs "#{self.full_path}"`.split('\t').first.to_i
     update :size => usage
     return usage
   end
@@ -53,7 +51,7 @@ class Share < ActiveRecord::Base
       errors.add :path, "File or directory #{full_path} already exists"
       return false
     end
-    FileUtils.mkdir_p full_path
+    FileUtils.mkdir_p(full_path)
   end
 
   def delete_storage_directory
