@@ -18,7 +18,7 @@ disk_usage_recalc_interval: "8.hours"
 api_endpoint: "http://localhost:3000/"
 
 # Allowed commands
-allowed_cmds: [sftp, scp, rsync, rdist, cvs]
+allowed_cmds: [sftp, scp, rsync]
 
 # Enable/disable quota functionality
 enable_quotas: true

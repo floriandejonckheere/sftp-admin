@@ -13,14 +13,21 @@ class SFTPAPI
   end
 
   def get_user(user_id)
-    uri = URI.join @config['api_endpoint'], '/users/', user_id
-    http = Net::HTTP.new uri.hostname, uri.port
-    res = http.get uri.request_uri, { 'Accept' => 'application/json' }
-
-    json = JSON.parse res.body
+    request "/users/#{user_id}"
   end
 
-  def check_share_path(share_path)
+  def get_share(share_path)
   end
 
+  def check_assess(share, user)
+  end
+
+  def request(request_uri)
+    uri = URI.join @config['api_endpoint'], request_uri
+    @http ||= Net::HTTP.new uri.hostname, uri.port
+
+    res = @http.get uri.request_uri, { 'Accept' => 'application/json' }
+
+    return JSON.parse res.body
+  end
 end
