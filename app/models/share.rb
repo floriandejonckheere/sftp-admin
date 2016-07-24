@@ -13,9 +13,11 @@ class Share < ActiveRecord::Base
   validates :quota,
               :presence => true
 
-  before_validation :resolve_path
-
   validate :path_subdir_of_storage_path
+
+  before_validation :resolve_path
+  after_create :create_storage_directory
+  after_destroy :delete_storage_directory
 
   # Dummy quota_unit attribute
   def quota_unit
@@ -25,9 +27,6 @@ class Share < ActiveRecord::Base
     p "#{self.quota} #{unit}"
     self.quota = Filesize.from("#{self.quota} #{unit}").to_i
   end
-
-  before_create :create_storage_directory
-  after_destroy :delete_storage_directory
 
   #
   # Methods

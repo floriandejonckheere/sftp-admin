@@ -34,6 +34,12 @@ A cron scheduler was included to periodically recalculate disk usage. Run the fo
 # sudo -u sftp -H whenever --update-crontab
 ```
 
+The `authorized_keys` file should be updated as keys are added and removed. If you ever should need to manually trigger a rebuild, execute the following command:
+
+```
+# sudo -u sftp -H bin/rails keys:update
+```
+
 ## Roadmap
 
 **v1.0**

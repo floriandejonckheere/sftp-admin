@@ -7,8 +7,6 @@ end
 
 # Size parsing
 gem 'filesize'
-# REST client
-gem 'rest-client'
 # Schedule tasks
 gem 'whenever'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
