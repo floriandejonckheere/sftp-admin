@@ -43,22 +43,22 @@ class SharesController < ApplicationController
   end
 
   # TODO: async these methods
-  def usage
+  def recalculate_usage
     @share = Share.find(params[:share_id])
-    @share.usage
+    @share.recalculate_usage
 
     redirect_to share_path(@share)
   end
 
-  def usage_all
-    SharesController.usage_all
+  def recalculate_usage
+    SharesController.recalculate_usage
 
     redirect_to shares_path
   end
 
-  def self.usage_all
+  def self.recalculate_usage
     Rails.logger.info "Recalculating disk usage for #{Share.count} shares"
-    Share.all.each { |share| share.usage }
+    Share.all.each { |share| share.recalculate_usage }
   end
 
 

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   get '/dashboard' => 'dashboard#index'
-  post '/usage' => 'shares#usage_all'
+  post '/usage' => 'shares#recalculate_usage'
   get '/statistics' => 'statistics#index'
 
   root 'dashboard#index'

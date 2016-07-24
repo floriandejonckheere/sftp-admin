@@ -42,7 +42,7 @@ class Share < ActiveRecord::Base
   end
 
   # Recalculate disk usage
-  def usage
+  def recalculate_usage
     usage = `du -bs "#{self.full_path}"`.split("\t").first.to_i
     update :size => usage
     return usage

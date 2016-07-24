@@ -28,6 +28,12 @@ Make sure this user has SSH permission (commonly achieved by adding it to the `s
 # sudo -u sftp -H mkdir -p ~/.ssh/ ~/storage/
 ```
 
+A cron scheduler was included to periodically recalculate disk usage. Run the following command to automatically update the crontab.
+
+```
+# sudo -u sftp -H whenever --update-crontab
+```
+
 ## Roadmap
 
 **v1.0**

@@ -2,7 +2,7 @@ namespace :storage do
 
   desc "Recalculate disk usage"
   task :usage => :environment do
-    SharesController.usage_all
+    SharesController.recalculate_usage
   end
 
 end
