@@ -13,6 +13,10 @@ class Share < ActiveRecord::Base
   validates :quota,
               :presence => true
 
+  before_validation :resolve_path
+
+  validate :path_subdir_of_storage_path
+
   # Dummy quota_unit attribute
   def quota_unit
   end
@@ -36,14 +40,13 @@ class Share < ActiveRecord::Base
 
   # Returns full directory path
   def full_path
-    return File.join(Rails.application.config.sftp['storage_path'], path)
+    File.expand_path(File.join(Rails.application.config.sftp['storage_path'], path))
   end
 
   # Recalculate disk usage
   def recalculate_usage
     usage = `du -bs "#{self.full_path}"`.split('\t').first.to_i
     update :size => usage
-    return usage
   end
 
   def create_storage_directory
@@ -56,5 +59,15 @@ class Share < ActiveRecord::Base
 
   def delete_storage_directory
     FileUtils.rm_rf(full_path)
+  end
+
+  def path_subdir_of_storage_path
+    unless full_path.start_with? Rails.application.config.sftp['storage_path']
+      errors.add :path, 'must be a subdirectory of the storage path'
+    end
+  end
+
+  def resolve_path
+    self.path = full_path[Rails.application.config.sftp['storage_path'].length..-1] || ''
   end
 end
