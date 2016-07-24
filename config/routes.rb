@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
 
   resources :shares do
-    post 'usage'
+    post 'usage' => 'shares#recalculate_usage'
   end
   resources :users do
     resources :pub_keys, :except => [:index, :show]
   end
 
+  post '/usage' => 'shares#recalculate_all_usage'
+
   get '/dashboard' => 'dashboard#index'
-  post '/usage' => 'shares#recalculate_usage'
   get '/statistics' => 'statistics#index'
 
   root 'dashboard#index'

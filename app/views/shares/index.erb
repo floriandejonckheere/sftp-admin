@@ -15,7 +15,7 @@
       <% @shares.each do |share| %>
       <tr>
         <td><%= link_to share.name.capitalize, share_path(share) %></td>
-        <td><%= share.path %></td>
+        <td><%= File.join('/', share.path) %></td>
         <td><%= number_to_human_size(share.size) %>
           <% if share.quota? %>
             /<%= number_to_human_size(share.quota) %></td>

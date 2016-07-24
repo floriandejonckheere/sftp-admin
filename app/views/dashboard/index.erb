@@ -9,7 +9,7 @@
         <h2><%= User.all.count %></h2> <h5><%= 'user'.pluralize(User.all.count) %></h5>
       </div>
       <div class="info-panel-actions">
-        <%= link_to "Details &raquo;".html_safe, users_path, :class => "white-text" %>
+        <%= link_to 'Details &raquo;'.html_safe, users_path, :class => 'white-text' %>
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@
         <h2><%= Share.all.count %></h2> <h5><%= 'share'.pluralize(Share.all.count) %></h5>
       </div>
       <div class="info-panel-actions">
-        <%= link_to "Details &raquo;".html_safe, shares_path, :class => "white-text" %>
+        <%= link_to 'Details &raquo;'.html_safe, shares_path, :class => 'white-text' %>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
         <h2><%= number_to_human_size(Share.sum(:size)).split(' ')[0] %></h2> <h5><%= number_to_human_size(Share.sum(:size)).split(' ')[1] %> total</h5>
       </div>
       <div class="info-panel-actions">
-        <%= link_to "Recalculate &raquo;".html_safe, usage_path, :method => :post, :class => "white-text" %>
+        <%= link_to 'Recalculate &raquo;'.html_safe, usage_path, :method => :post, :class => 'white-text' %>
       </div>
     </div>
   </div>
