@@ -19,3 +19,5 @@ vendor/bundle
 
 *.png
 *.jpg
+
+.byebug_history

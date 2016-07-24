@@ -1,8 +1,8 @@
 namespace :keys do
 
-  desc "Regenerate the authorized_keys file"
-  task :regenerate => :environment do
-    KeyManager.regenerate_all
+  desc "Update the authorized_keys file"
+  task :update => :environment do
+    KeyManager.update_keys
   end
 
 end
