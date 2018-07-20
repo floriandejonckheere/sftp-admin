@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+/.gem
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -13,11 +14,45 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
+/tmp/*
 !/log/.keep
-/tmp
-vendor/bundle
+!/tmp/.keep
 
-*.png
-*.jpg
-
+# Ignore Byebug command history file.
 .byebug_history
+
+# IDE files
+.idea
+
+# Private files
+*.env
+config/*.pem
+config/*.pub
+nginx/*.crt
+nginx/*.key
+
+# Coverage report
+coverage/
+
+/.gem
+/.vscode
+
+package-lock.json
+.yarnclean
+jsconfig.json
+
+# Generated documentation
+doc/
+
+.vscode
+.DS_Store
+
+# Local repositories
+data/*
+client/app/constants/exampleDecks.js
+
+# Production API url override
+client/config/config.js
+
+# test files
+client/app/testPrintView/*
