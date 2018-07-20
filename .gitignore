@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+/.gem
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -17,11 +18,41 @@
 !/log/.keep
 !/tmp/.keep
 
-/node_modules
-/yarn-error.log
-
-/public/assets
+# Ignore Byebug command history file.
 .byebug_history
 
-# Ignore master key for decrypting credentials and more.
-/config/master.key
+# IDE files
+.idea
+
+# Private files
+*.env
+config/*.pem
+config/*.pub
+nginx/*.crt
+nginx/*.key
+
+# Coverage report
+coverage/
+
+/.gem
+/.vscode
+
+package-lock.json
+.yarnclean
+jsconfig.json
+
+# Generated documentation
+doc/
+
+.vscode
+.DS_Store
+
+# Local repositories
+data/*
+client/app/constants/exampleDecks.js
+
+# Production API url override
+client/config/config.js
+
+# test files
+client/app/testPrintView/*
