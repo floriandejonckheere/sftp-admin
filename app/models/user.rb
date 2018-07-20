@@ -12,6 +12,9 @@ class User < ApplicationRecord
   has_and_belongs_to_many :shares,
                           -> { distinct }
 
+  has_many :keys,
+           :dependent => :destroy
+
   ##
   # Validations
   #
