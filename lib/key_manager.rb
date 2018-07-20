@@ -5,8 +5,10 @@ class KeyManager
   @@authorized_keys_file = File.join @@authorized_keys_path, 'authorized_keys'
 
   def self.update_keys
+    FileUtils.mkdir_p @@authorized_keys_path unless File.directory? @@authorized_keys_path
+
     File.open @@authorized_keys_file, 'w' do |file|
-      PubKey.all.each do |key|
+      Key.all.each do |key|
         Rails.logger.info "Writing key #{key.id} for user #{key.user.id} to #{@@authorized_keys_file}"
         file.puts "command=\"#{Rails.root.join('bin', 'sftp-shell')} #{key.user.id}\" #{key.key}"
       end
