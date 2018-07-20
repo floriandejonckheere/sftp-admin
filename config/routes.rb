@@ -1,5 +1,23 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'dashboard#index'
+
+  resources :shares do
+    resource :usage,
+             :only => :create,
+             :controller => 'shares',
+             :action => 'recalculate_usage'
+  end
+
+  resources :users do
+    resources :keys, :except => %i[index show]
+  end
+
+  resource :usage,
+           :only => :create,
+           :controller => 'shares',
+           :action => 'recalculate_all_usage'
+
+  resource :dashboard, :only => :index
 end
