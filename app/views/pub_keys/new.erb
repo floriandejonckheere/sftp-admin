@@ -1,7 +1,0 @@
-<h4>Add public key</h4>
-
-<hr>
-
-<%= form_for @pub_key, url: user_pub_keys_path(@user) do |p| %>
-  <%= render :partial => 'form', :locals => {:p => p} %>
-<% end %>
