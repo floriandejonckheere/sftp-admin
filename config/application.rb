@@ -31,5 +31,7 @@ module SftpAdmin
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.sftp = YAML.load_file Rails.root.join 'config', 'sftp.yml'
   end
 end
