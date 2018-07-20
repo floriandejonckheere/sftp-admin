@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_20_163503) do
+ActiveRecord::Schema.define(version: 2018_07_20_164822) do
 
   create_table "keys", force: :cascade do |t|
     t.string "title", null: false
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 2018_07_20_163503) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["path"], name: "index_shares_on_path", unique: true
+  end
+
+  create_table "shares_users", id: false, force: :cascade do |t|
+    t.integer "share_id", null: false
+    t.integer "user_id", null: false
+    t.index ["share_id"], name: "index_shares_users_on_share_id"
+    t.index ["user_id"], name: "index_shares_users_on_user_id"
+    t.index [nil, nil], name: "index_shares_users_on_share_and_user", unique: true
+    t.index [nil, nil], name: "index_shares_users_on_user_and_share", unique: true
   end
 
   create_table "users", force: :cascade do |t|

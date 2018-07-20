@@ -12,6 +12,9 @@ class Share < ApplicationRecord
   ##
   # Associations
   #
+  has_and_belongs_to_many :users,
+                          -> { distinct }
+
   ##
   # Validations
   #
@@ -67,7 +70,7 @@ class Share < ApplicationRecord
 
   # Returns full storage path
   def full_path
-    File.expand_path File.join Rails.application.config.sftp['storage_path'], path
+    File.expand_path File.join Rails.application.config.sftp['storage_path'], path || ''
   end
 
   def resolve_path

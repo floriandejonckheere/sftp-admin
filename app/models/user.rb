@@ -9,6 +9,9 @@ class User < ApplicationRecord
   ##
   # Associations
   #
+  has_and_belongs_to_many :shares,
+                          -> { distinct }
+
   ##
   # Validations
   #
