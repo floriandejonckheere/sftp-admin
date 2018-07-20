@@ -5,12 +5,9 @@ require 'shellwords'
 require_relative 'config'
 require_relative 'api'
 require_relative 'logger'
+require_relative 'errors'
 
 class SFTPShell
-  class AccessDeniedError < StandardError; end
-  class DisallowedCommandError < StandardError; end
-  class InvalidSharePathError < StandardError; end
-
   attr_accessor :config, :user, :original_cmd, :cmd, :share_path, :share
 
   def initialize(user_id, original_cmd)
