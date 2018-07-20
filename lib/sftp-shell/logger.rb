@@ -2,8 +2,8 @@
 
 require 'logger'
 
-require_relative 'sftp_config'
+require_relative 'config'
 
-config = SFTPConfig.new.config
+config = Config.new.config
 
 $logger = Logger.new(config['sftp_log'])

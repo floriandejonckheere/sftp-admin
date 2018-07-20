@@ -2,9 +2,9 @@
 
 require 'shellwords'
 
-require_relative 'sftp_config'
-require_relative 'sftp_api'
-require_relative 'sftp_logger'
+require_relative 'config'
+require_relative 'api'
+require_relative 'logger'
 
 class SFTPShell
   class AccessDeniedError < StandardError; end
@@ -14,7 +14,7 @@ class SFTPShell
   attr_accessor :config, :user, :original_cmd, :cmd, :share_path, :share
 
   def initialize(user_id, original_cmd)
-    @config = SFTPConfig.new.config
+    @config = Config.new.config
     @api = SFTPAPI.new
     @user = @api.get_user(user_id)
     @original_cmd = original_cmd

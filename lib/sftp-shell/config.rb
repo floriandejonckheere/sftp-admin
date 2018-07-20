@@ -2,7 +2,7 @@
 
 require 'yaml'
 
-class SFTPConfig
+class Config
   attr_reader :config
 
   def initialize

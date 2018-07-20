@@ -4,13 +4,13 @@ require 'net/http'
 require 'yaml'
 require 'json'
 
-require_relative 'sftp_config'
+require_relative 'config'
 
 class SFTPAPI
   attr_accessor :config
 
   def initialize
-    @config = SFTPConfig.new.config
+    @config = Config.new.config
   end
 
   def get_user(user_id)
