@@ -1,11 +1,11 @@
 # SSH-enabled user
-user: sftp
+user: florian
 
 # Home directory of user
-home_directory: "/home/sftp/"
+home_directory: "/home/florian/"
 
 # Root path of shares
-storage_path: "/home/sftp/storage/"
+storage_path: "/home/florian/storage/"
 
 # Time between scheduled disk usage recalculations
 disk_usage_recalc_interval: "8.hours"
@@ -21,7 +21,7 @@ features:
 # sftp-shell
 shell:
   # Log file location
-  log: "/home/sftp/sftp-shell.log"
+  log: "/home/florian/sftp-shell.log"
 
   # API endpoint URL
   api: "http://localhost:3000/"

@@ -1,36 +1,39 @@
 # frozen_string_literal: true
 
 require 'net/http'
-require 'yaml'
 require 'json'
 
 require_relative 'config'
+require_relative 'errors'
 
-class SFTPAPI
-  attr_accessor :config
+module SFTPShell
+  module API
+    class User
+      attr_accessor :id,
+                    :name
 
-  def initialize
-    @config = Config.new.config
-  end
+      def initialize(user_id)
+        response = API.request "/users/#{user_id}"
 
-  def get_user(user_id)
-    request "/users/#{user_id}"
-  end
+        @id = response['id']
+        @name = response['name']
+      end
+    end
 
-  def get_share(share_path)
-    # TODO
-  end
+    private
 
-  def check_assess(share, user)
-    # TODO
-  end
+      def self.request(request_uri)
+        config = Config.read
 
-  def request(request_uri)
-    uri = URI.join @config['api_endpoint'], request_uri
-    @http ||= Net::HTTP.new uri.hostname, uri.port
+        uri = URI.join config['shell']['api'], request_uri
+        http ||= Net::HTTP.new uri.hostname, uri.port
 
-    res = @http.get uri.request_uri, 'Accept' => 'application/json'
+        res = http.get uri.request_uri, 'Accept' => 'application/json'
 
-    JSON.parse res.body
+        JSON.parse res.body
+      rescue => ex
+        # TODO: error handling
+        raise SFTPShell::ServerError, ex
+      end
   end
 end
