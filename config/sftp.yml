@@ -1,12 +1,8 @@
 # SSH-enabled user
 user: sftp
-welcome_msg: "Welcome, #{user_name}!"
 
 # Home directory of user
 home_directory: "/home/sftp/"
-
-# sftp-shell log
-sftp_log: "/home/sftp/sftp-shell.log"
 
 # Root path of shares
 storage_path: "/home/sftp/storage/"
@@ -14,14 +10,21 @@ storage_path: "/home/sftp/storage/"
 # Time between scheduled disk usage recalculations
 disk_usage_recalc_interval: "8.hours"
 
-# API endpoint URL
-api_endpoint: "http://localhost:3000/"
+# Enable/disable features
+features:
+  # Enforce quotas
+  quotas: false
 
-# Allowed commands
-allowed_cmds: [sftp, scp, rsync]
+  # Enforce at-rest encryption
+  encryption: false
 
-# Enable/disable quota functionality
-enable_quotas: true
+# sftp-shell
+shell:
+  # Log file location
+  log: "/home/sftp/sftp-shell.log"
 
-# Enable/disable encryption functionality
-enable_encryption: false
+  # API endpoint URL
+  api: "http://localhost:3000/"
+
+  # Allowed commands
+  allowed_cmds: [sftp, scp, rsync]
