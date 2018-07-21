@@ -20,20 +20,18 @@ module SFTPShell
       end
     end
 
-    private
+    def self.request(request_uri)
+      config = Config.read
 
-      def self.request(request_uri)
-        config = Config.read
+      uri = URI.join config['shell']['api'], request_uri
+      http ||= Net::HTTP.new uri.hostname, uri.port
 
-        uri = URI.join config['shell']['api'], request_uri
-        http ||= Net::HTTP.new uri.hostname, uri.port
+      res = http.get uri.request_uri, 'Accept' => 'application/json'
 
-        res = http.get uri.request_uri, 'Accept' => 'application/json'
-
-        JSON.parse res.body
-      rescue => ex
-        # TODO: error handling
-        raise SFTPShell::ServerError, ex
-      end
+      JSON.parse res.body
+    rescue StandardError => ex
+      # TODO: error handling
+      raise SFTPShell::ServerError, ex
+    end
   end
 end
