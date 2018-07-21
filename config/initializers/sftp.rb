@@ -11,3 +11,6 @@ if Rails.application.config.sftp['features']['encryption']
   `which encfs &> /dev/null`
   abort 'Command not found: encfs. Install encfs or disable encryption in config/sftp.yml.' unless $?.success?
 end
+
+`which ssh-keygen &> /dev/null`
+abort 'Command not found: ssh-keygen. Install ssh-keygen to continue.' unless $?.success?

@@ -26,6 +26,8 @@ class Key < ApplicationRecord
   validates :user,
             :presence => true
 
+  validate :openssh_key
+
   ##
   # Callbacks
   #
@@ -44,5 +46,10 @@ class Key < ApplicationRecord
   #
   def update_keys
     KeyManager.update_keys
+  end
+
+  def openssh_key
+    `echo "#{key}" | ssh-keygen -l -f - &> /dev/null`
+    errors.add :key, 'must be a valid OpenSSH key' unless $?.success?
   end
 end
