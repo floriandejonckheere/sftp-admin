@@ -20,4 +20,9 @@ Rails.application.routes.draw do
            :action => 'recalculate_all_usage'
 
   resource :dashboard, :only => :index
+
+  scope :api, :format => :json do
+    get '/users/:id' => 'api#show_user'
+    get '/shares/:path' => 'api#show_share'
+  end
 end
