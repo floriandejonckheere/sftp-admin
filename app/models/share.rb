@@ -50,10 +50,15 @@ class Share < ApplicationRecord
     true
   end
 
-  # Recalculate disk usage
+  # Recalculate disk usage of share
   def recalculate_usage!
     usage = `du -bs "#{full_path}"`.split('\t').first.to_i
     update :size => usage
+  end
+
+  # Recalculate disk usage of all shares
+  def self.recalculate_all_usage!
+    Share.all.each &:recalculate_usage!
   end
 
   ##

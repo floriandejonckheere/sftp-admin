@@ -48,16 +48,15 @@ class SharesController < ApplicationController
   def recalculate_usage
     @share = Share.find params[:share_id]
 
-    Rails.logger.info "Recalculating disk usage for share #{@share.name}"
-    @share.recalculate_usage
+    Rails.logger.info "Recalculating disk usage for share #{@share.id}"
+    @share.recalculate_usage!
 
     redirect_to @share
   end
 
-  # TODO: recalculate total storage directory
   def recalculate_all_usage
-    Rails.logger.info "Recalculating disk usage for #{Share.count} share(s)"
-    Share.all.each &:recalculate_usage!
+    Rails.logger.info "Recalculating disk usage for all share(s)"
+    Share.recalculate_all_usage!
 
     redirect :back
   end
