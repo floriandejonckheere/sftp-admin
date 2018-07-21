@@ -1,5 +1,7 @@
 {
-  "name": "SftpAdmin",
+  "name": "sftp-admin",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "uikit": "^3.0.0-rc.9"
+  }
 }
