@@ -24,5 +24,6 @@ Rails.application.routes.draw do
   scope :api, :format => :json do
     get '/users/:id' => 'api#show_user'
     get '/shares/:path' => 'api#show_share'
+    get '/authorization/:share_id/:user_id' => 'api#authorize'
   end
 end
