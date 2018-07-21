@@ -17,6 +17,8 @@ require_relative File.join '..', 'lib', 'sftp-shell'
 
 puts "sftp-shell: This is sftp-shell #{File.read(File.join ROOT_PATH, 'VERSION').chomp}."
 
-shell = SFTPShell::Shell.new user_id, original_cmd
-
-shell.exec ? exit : abort
+if SFTPShell::Shell.new(user_id, original_cmd).exec
+  exit 0
+else
+  exit 1
+end

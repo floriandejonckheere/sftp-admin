@@ -25,6 +25,3 @@ shell:
 
   # API endpoint URL
   api: "http://localhost:3000/"
-
-  # Allowed commands
-  allowed_cmds: [sftp, scp, rsync]
