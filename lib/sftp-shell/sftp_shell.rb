@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'shellwords'
+require 'logger'
 
 require_relative 'config'
 require_relative 'api'
-require_relative 'logger'
 require_relative 'errors'
 
 class SFTPShell
@@ -13,8 +13,10 @@ class SFTPShell
   def initialize(user_id, original_cmd)
     @config = Config.new.config
     @api = SFTPAPI.new
-    @user = @api.get_user(user_id)
+    @user = @api.get_user user_id
     @original_cmd = original_cmd
+
+    @logger = Logger.new @config['sftp_log']
   end
 
   def exec
@@ -65,7 +67,7 @@ class SFTPShell
     raise AccessDeniedError unless access
   end
 
-  def execute_cmd(args)
+  def execute_cmd(*args)
     env = {
       'HOME' => ENV['HOME'],
       'PATH' => ENV['PATH'],

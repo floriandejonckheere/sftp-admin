@@ -17,9 +17,13 @@ class SFTPAPI
     request "/users/#{user_id}"
   end
 
-  def get_share(share_path); end
+  def get_share(share_path)
+    # TODO
+  end
 
-  def check_assess(share, user); end
+  def check_assess(share, user)
+    # TODO
+  end
 
   def request(request_uri)
     uri = URI.join @config['api_endpoint'], request_uri
