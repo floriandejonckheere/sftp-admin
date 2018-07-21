@@ -13,10 +13,31 @@ module SFTPShell
                     :name
 
       def initialize(user_id)
-        response = API.request "/users/#{user_id}.json"
+        response = API.request "/api/users/#{user_id}"
 
         @id = response['id']
         @name = response['name']
+      end
+    end
+
+    class Share
+      attr_accessor :id,
+                    :name
+
+      def initialize(share_path)
+        response = API.request "/api/shares/#{share_path}"
+
+        @id = response['id']
+        @name = response['name']
+      end
+    end
+
+    class Authorization
+      attr_accessor :authorized
+
+      def initialize(share_id, user_id)
+        response = API.request "/api/authorization/#{share_id}/#{user_id}"
+        @authorized = response['authorized']
       end
     end
 
