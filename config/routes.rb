@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'dashboard#index'
+  root 'application#index'
 
   resources :shares do
     resource :usage,
