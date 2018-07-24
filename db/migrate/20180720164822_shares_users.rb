@@ -7,7 +7,7 @@ class SharesUsers < ActiveRecord::Migration[5.2]
       t.references :user, :null => false, :foreign_key => true
     end
 
-    add_index :shares_users, %i[share user], unique: true
-    add_index :shares_users, %i[user share], unique: true
+    add_index :shares_users, %i[share user], :unique => true
+    add_index :shares_users, %i[user share], :unique => true
   end
 end

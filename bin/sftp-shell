@@ -1,10 +1,15 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 #
 # SFTP shell, invoked from ~/.ssh/authorized_keys
 #
-unless (ENV['SSH_CONNECTION'] or ENV['SSH_CLIENT'] or ENV['SSH_TTY']) and `ps -o comm= -p #{Process.ppid}`.chomp == 'sshd'
-  puts "Only SSH connections are allowed."
+
+# Ensure that this script gets executed only in SSH environments
+ssh_env = ENV['SSH_CONNECTION'] || ENV['SSH_CLIENT'] || ENV['SSH_TTY']
+
+unless ssh_env && (`ps -o comm= -p #{Process.ppid}`.chomp == 'sshd')
+  puts 'Only SSH connections are allowed.'
   abort
 end
 

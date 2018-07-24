@@ -50,6 +50,6 @@ class Key < ApplicationRecord
 
   def openssh_key
     `echo "#{key}" | ssh-keygen -l -f - &> /dev/null`
-    errors.add :key, 'must be a valid OpenSSH key' unless $?.success?
+    errors.add :key, 'must be a valid OpenSSH key' unless $CHILD_STATUS.success?
   end
 end

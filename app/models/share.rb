@@ -44,7 +44,7 @@ class Share < ApplicationRecord
   # Returns false if quota is disabled (globally or per share)
   def quota?
     return false unless quota
-    return false if quota == 0
+    return false if quota.zero?
     return false unless Rails.application.config.sftp['enable_quotas']
 
     true
@@ -58,7 +58,7 @@ class Share < ApplicationRecord
 
   # Recalculate disk usage of all shares
   def self.recalculate_all_usage!
-    Share.all.each &:recalculate_usage!
+    Share.all.each(&:recalculate_usage!)
   end
 
   ##
@@ -68,9 +68,9 @@ class Share < ApplicationRecord
   # Helpers and callback methods
   #
   def path_subdir_of_storage_path
-    unless full_path.start_with? Rails.application.config.sftp['storage_path']
-      errors.add :path, 'must be a subdirectory of the storage path'
-    end
+    return if full_path.start_with? Rails.application.config.sftp['storage_path']
+
+    errors.add :path, 'must be a subdirectory of the storage path'
   end
 
   # Returns full storage path

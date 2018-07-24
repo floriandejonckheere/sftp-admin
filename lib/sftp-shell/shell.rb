@@ -8,7 +8,7 @@ require_relative 'errors'
 require_relative 'api'
 
 # Commands allowed in shell
-ALLOWED_COMMANDS = %w(sftp scp rsync)
+ALLOWED_COMMANDS = %w[sftp scp rsync].freeze
 
 module SFTPShell
   class Shell

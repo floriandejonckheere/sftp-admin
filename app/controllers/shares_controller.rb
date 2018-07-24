@@ -55,7 +55,7 @@ class SharesController < ApplicationController
   end
 
   def recalculate_all_usage
-    Rails.logger.info "Recalculating disk usage for all share(s)"
+    Rails.logger.info 'Recalculating disk usage for all share(s)'
     Share.recalculate_all_usage!
 
     redirect :back
