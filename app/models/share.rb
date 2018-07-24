@@ -24,7 +24,7 @@ class Share < ApplicationRecord
   validates :path,
             :presence => true,
             :uniqueness => true,
-            :format => { :with => /[^\0]*/ }
+            :format => { :with => /\A[^\0]*\z/ }
 
   validates :quota,
             :presence => true
